@@ -22,3 +22,8 @@ target_link_libraries(${PROJECT_NAME}
 # Enable USB serial output, disable UART output
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
 pico_enable_stdio_uart(${PROJECT_NAME} 0)
+
+# For some reason this option needs to be cached when using Unix Makefiles.
+# Also means this cmake needs to be run twice before the compile_commands.json
+# properly takes effect.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
