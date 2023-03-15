@@ -11,6 +11,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Bootstrap
+        run: ./bootstrap.sh
+        shell: bash
       - name: Build
         run: ./build.sh
         shell: bash
