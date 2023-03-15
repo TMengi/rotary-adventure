@@ -13,6 +13,9 @@ cwd="$(pwd)"
 root="$(git rev-parse --show-toplevel)"
 devel="/home/$(whoami)/devel/"
 
+if [[ ! -e $devel ]]; then
+  mkdir $devel
+fi
 cd $devel
 
 # Install toolchain
