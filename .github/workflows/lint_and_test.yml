@@ -7,14 +7,20 @@ env:
 
 jobs:
 
-  lint:
-    name: Lint all
+  checkout:
+    name: Checkout branch
     runs-on: ubuntu-latest
-    steps:
+    steps: 
       - name: Checkout branch
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+  lint:
+    name: Lint all
+    needs: [checkout]
+    runs-on: ubuntu-latest
+    steps:
       - name: Run Linter
         uses: github/super-linter@v4
         env:
@@ -24,12 +30,9 @@ jobs:
 
   build-and-test:
     name: Build and test
+    needs: [checkout]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Bootstrap
         run: ./bootstrap.sh
         shell: bash
