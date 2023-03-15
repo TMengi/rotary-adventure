@@ -1,3 +1,5 @@
+set -e
+
 # Save directory structure
 cwd="$(pwd)"
 root="$(git rev-parse --show-toplevel)"

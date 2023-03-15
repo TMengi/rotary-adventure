@@ -3,8 +3,8 @@ name: Lint all
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: Lint
+  lint:
+    name: Lint all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
