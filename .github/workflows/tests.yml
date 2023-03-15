@@ -1,0 +1,16 @@
+name: Unittest all
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Unittest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch_depth: 0
+      - name: Build
+        run: ./build.sh
+        shell: bash
