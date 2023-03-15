@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 # Based on instructions from
 # https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
 set -e
