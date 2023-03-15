@@ -6,10 +6,9 @@ Or at least it will be one day. Just a skeleton right now while I design
 hardware and get the dev environment set up.
 
 ## Install
-- If you have not already, install the Raspberry Pi Pico C/C++ SDK using the
-  instructions in [Getting started with Raspberry Pi
-  Pico](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf).
-- Clone the repo and run the build script:
+- Clone this repo into `~/devel/`
+- Run `bootstrap.sh` to install the Raspberry Pi Pico C/C++ SDK
+- Run the build script:
   ```bash
   git clone https://github.com/TMengi/rotary-adventure.git
   cd rotary-adventure
@@ -21,6 +20,12 @@ hardware and get the dev environment set up.
   - If the script continues to display the same warnings, you can still
     proceed, but your editor may not be able to recognize imports from the Pico
     libaries.
+
+## Building the code
+For normal code changes and updates, navigate to the `build/` directory and run
+the `make` command.
+
+For changes that add new source files and libraries, rerun `build.sh`.
 
 ## Uploading to hardware
 - Obtain a Raspberry Pi Pico.
