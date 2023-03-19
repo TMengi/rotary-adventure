@@ -6,7 +6,7 @@ Or at least it will be one day. Just a skeleton right now while I design
 hardware and get the dev environment set up.
 
 ## Install
-- Clone this repo into `~/devel/`
+- Clone this repository into `~/devel/`
 - Run `bootstrap.sh` to install the Raspberry Pi Pico C/C++ SDK
 - Run `build.sh` to finish building the code
   - If the first run prints out a warning about not being able to find
