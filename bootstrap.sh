@@ -2,6 +2,7 @@
 
 # Based on instructions from
 # https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
+
 set -e
 
 print_header() {
