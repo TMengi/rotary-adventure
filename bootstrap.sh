@@ -1,5 +1,9 @@
+#!/usr/bin/bash
+
 # Based on instructions from
 # https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
+
+set -e
 
 print_header() {
   echo
@@ -10,9 +14,12 @@ print_header() {
 
 cwd="$(pwd)"
 root="$(git rev-parse --show-toplevel)"
-devel="~/devel/"
+devel="/home/$(whoami)/devel/"
 
-cd $devel
+if [[ ! -e "$devel" ]]; then
+  mkdir "$devel"
+fi
+cd "$devel"
 
 # Install toolchain
 sudo apt install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential
@@ -27,6 +34,7 @@ if [[ ! -e pico-sdk ]]; then
   git clone https://github.com/raspberrypi/pico-sdk.git --branch master
   cd pico-sdk
   git submodule update --init
+  export PICO_SDK_PATH="$devel/pico/pico-sdk"
 else
   print_header "Updating Pico SDK"
   cd pico-sdk
@@ -35,10 +43,10 @@ else
 fi
 
 # Run initial build
-cd $root
+cd "$root"
 print_header "Building project"
 ./build.sh
 
 echo -e "\n\e[32mBootstrap done\e[0m"
 
-cd $cwd
+cd "$cwd"
