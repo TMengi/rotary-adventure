@@ -11,6 +11,9 @@ pico_sdk_init()
 
 add_executable(${PROJECT_NAME}
   main.cc
+  i2c_device.cc
+  lsm6ds33.cc
+  lis3mdl.cc
   vl6180x.cc
 )
 

@@ -1,4 +1,6 @@
 #include "hardware/i2c.h"
+#include "lis3mdl.h"
+#include "lsm6ds33.h"
 #include "pico/stdlib.h"
 #include "vl6180x.h"
 #include <stdio.h>
@@ -16,13 +18,12 @@ void blink() {
 }
 
 const uint32_t I2C_SPEED{100'000};
-const uint8_t SDA_PIN{16};
-const uint8_t SCL_PIN{17};
-i2c_inst_t *i2c{i2c0};
+const uint8_t SDA_PIN{14};
+const uint8_t SCL_PIN{15};
+i2c_inst_t *i2c = i2c1;
 
 void setup_i2c() {
-  printf("initializing i2c with %d baud\n", I2C_SPEED);
-  i2c_init(i2c, I2C_SPEED);
+  uint32_t real_baud = i2c_init(i2c, I2C_SPEED);
   gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
   gpio_set_function(SCL_PIN, GPIO_FUNC_I2C);
   gpio_pull_up(SDA_PIN);
@@ -39,16 +40,27 @@ int main() {
   gpio_set_dir(led_pin, GPIO_OUT);
   gpio_put(led_pin, 1);
 
-  printf("trying to write register\n");
-  int model_id{0};
-  uint8_t data[] = {0xB4};
-  printf("data is 0x%X\n", data[0]);
-  int bytes_written = vl6180x::reg_write(i2c, 0x00, data, 1);
-  printf("wrote %d bytes\n", bytes_written);
-  while (true) {
-    model_id = vl6180x::read_model_id(i2c);
-    sleep_ms(1000);
-  }
+  uint8_t model_id{0};
+  lsm6ds33::LSM6DS33 lsm = lsm6ds33::LSM6DS33(i2c);
+  lis3mdl::LIS3MDL lis = lis3mdl::LIS3MDL(i2c);
+  vl6180x::VL6180X vlx = vl6180x::VL6180X(i2c);
+
+  lsm.init();
+  lis.init();
+  vlx.init();
+
+  // while (true) {
+  //   model_id = lsm.read_model_id();
+  //   printf("got model id for lsm: 0x%X (%d)\n", model_id, model_id);
+  //
+  //   model_id = lis.read_model_id();
+  //   printf("got model id for lis: 0x%X (%d)\n", model_id, model_id);
+  //
+  //   model_id = vlx.read_model_id();
+  //   printf("got model id for vlx: 0x%X (%d)\n", model_id, model_id);
+  //
+  //   sleep_ms(1000);
+  // }
 
   return 0;
 }
