@@ -26,8 +26,7 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Only use clang-format, not cpp-lint
-          VALIDATE_CLANG_FORMAT: true
+          # Disable cpp-lint and only use clang-format
           VALIDATE_CPP: false
 
   build-and-test:
