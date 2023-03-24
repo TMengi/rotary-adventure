@@ -1,7 +1,10 @@
----
 name: Lint and Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore: [master, main]
+  pull_request:
+    branches: [master, main]
 
 env:
   PICO_SDK_PATH: /home/runner/devel/pico/pico-sdk
@@ -19,9 +22,13 @@ jobs:
       - name: Run Linter
         uses: github/super-linter@v4
         env:
+          # Parse only new/edited files
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Only use clang-format, not cpp-lint
+          VALIDATE_CLANG_FORMAT: true
+          VALIDATE_CPP: false
 
   build-and-test:
     name: Build and test
