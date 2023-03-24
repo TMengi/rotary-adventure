@@ -9,14 +9,20 @@ set(CMAKE_CXX_STANDARD 17)
 # Creates a pico-sdk subdirectory in our project for the libraries
 pico_sdk_init()
 
-add_executable(${PROJECT_NAME} main.cc)
+add_executable(${PROJECT_NAME}
+  main.cc
+  i2c_device.cc
+  lsm6ds33.cc
+  lis3mdl.cc
+)
 
 # Create map/bin/hex/uf2 files
 pico_add_extra_outputs(${PROJECT_NAME})
 
 # Link to pico_stdlib (gpio, time, etc. functions)
 target_link_libraries(${PROJECT_NAME} 
-    pico_stdlib
+  pico_stdlib
+  hardware_i2c
 )
 
 # Enable USB serial output, disable UART output
