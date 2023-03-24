@@ -23,7 +23,7 @@ jobs:
         uses: github/super-linter@v4
         env:
           # Parse only new/edited files
-          # VALIDATE_ALL_CODEBASE: false
+          VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Disable cpp-lint and only use clang-format
