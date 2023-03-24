@@ -14,7 +14,6 @@ add_executable(${PROJECT_NAME}
   i2c_device.cc
   lsm6ds33.cc
   lis3mdl.cc
-  vl6180x.cc
 )
 
 # Create map/bin/hex/uf2 files

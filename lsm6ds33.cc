@@ -12,7 +12,7 @@ uint8_t LSM6DS33::read_model_id() {
 bool LSM6DS33::init() {
   uint8_t model_id = this->read_model_id();
   if (model_id != DEFAULT_MODEL_ID) {
-    printf("Failed to initialize LSM6DS33: got model ID %d, expected %d\n",
+    printf("Failed to initialize LSM6DS33: got model ID 0x%X, expected 0x%X\n",
            model_id, DEFAULT_MODEL_ID);
     return false;
   }

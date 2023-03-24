@@ -2,8 +2,8 @@
 #include "lis3mdl.h"
 #include "lsm6ds33.h"
 #include "pico/stdlib.h"
-#include "vl6180x.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void blink() {
   const uint8_t LED_PIN = PICO_DEFAULT_LED_PIN;
@@ -24,6 +24,10 @@ i2c_inst_t *i2c = i2c1;
 
 void setup_i2c() {
   uint32_t real_baud = i2c_init(i2c, I2C_SPEED);
+  if (real_baud != I2C_SPEED) {
+    printf("Could not initialize I2C with baud %d\n", I2C_SPEED);
+    exit(-1);
+  }
   gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
   gpio_set_function(SCL_PIN, GPIO_FUNC_I2C);
   gpio_pull_up(SDA_PIN);
@@ -43,24 +47,22 @@ int main() {
   uint8_t model_id{0};
   lsm6ds33::LSM6DS33 lsm = lsm6ds33::LSM6DS33(i2c);
   lis3mdl::LIS3MDL lis = lis3mdl::LIS3MDL(i2c);
-  vl6180x::VL6180X vlx = vl6180x::VL6180X(i2c);
 
-  lsm.init();
-  lis.init();
-  vlx.init();
+  bool success{true};
+  success &= lsm.init();
+  success &= lis.init();
+  auto msg = success ? "success\n" : "failure\n";
+  printf(msg);
 
-  // while (true) {
-  //   model_id = lsm.read_model_id();
-  //   printf("got model id for lsm: 0x%X (%d)\n", model_id, model_id);
-  //
-  //   model_id = lis.read_model_id();
-  //   printf("got model id for lis: 0x%X (%d)\n", model_id, model_id);
-  //
-  //   model_id = vlx.read_model_id();
-  //   printf("got model id for vlx: 0x%X (%d)\n", model_id, model_id);
-  //
-  //   sleep_ms(1000);
-  // }
+  while (true) {
+    model_id = lsm.read_model_id();
+    printf("got model id for lsm: 0x%X (%d)\n", model_id, model_id);
+
+    model_id = lis.read_model_id();
+    printf("got model id for lis: 0x%X (%d)\n", model_id, model_id);
+
+    sleep_ms(5000);
+  }
 
   return 0;
 }
