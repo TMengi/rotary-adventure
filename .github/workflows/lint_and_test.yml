@@ -41,5 +41,5 @@ jobs:
         run: ./bootstrap.sh
         shell: bash
       - name: Build
-        run: ./build.sh
+        run: ./scripts/build.sh
         shell: bash

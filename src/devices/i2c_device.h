@@ -22,8 +22,8 @@ protected:
   // These wrappers first check that the number of bytes to be read/written is
   // at least 1, then write the starting address, and finally read/write
   // to/from the data buffer, returning the number of bytes transmitted.
-  virtual int reg_read(uint8_t reg, uint8_t *dst, size_t nbytes);
-  virtual int reg_write(uint8_t reg, const uint8_t *src, size_t nbytes);
+  int reg_read(uint8_t reg, uint8_t *dst, size_t nbytes);
+  int reg_write(uint8_t reg, const uint8_t *src, size_t nbytes);
 
 private:
   // Address a register for reading/writing

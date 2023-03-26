@@ -1,4 +1,5 @@
 #include "i2c_device.h"
+#include "hardware/i2c.h"
 
 namespace i2c_device {
 

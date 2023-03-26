@@ -9,11 +9,18 @@ set(CMAKE_CXX_STANDARD 17)
 # Creates a pico-sdk subdirectory in our project for the libraries
 pico_sdk_init()
 
-add_executable(${PROJECT_NAME}
-  main.cc
-  i2c_device.cc
-  lsm6ds33.cc
-  lis3mdl.cc
+# Define the main executable and include our source files
+add_subdirectory(src/devices)
+add_executable(${PROJECT_NAME} src/main.cc)
+
+# Include our first-party libraries
+target_link_libraries(${PROJECT_NAME}
+  lsm6ds33
+  lis3mdl
+)
+target_include_directories(${PROJECT_NAME} PUBLIC
+  ${PROJECT_BINARY_DIR}
+  ${PROJECT_SOURCE_DIR}/src/devices
 )
 
 # Create map/bin/hex/uf2 files
