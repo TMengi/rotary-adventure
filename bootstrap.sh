@@ -43,7 +43,7 @@ else
 fi
 
 # Run initial build
-cd "$root"
+cd "$root/scripts"
 print_header "Building project"
 ./build.sh
 

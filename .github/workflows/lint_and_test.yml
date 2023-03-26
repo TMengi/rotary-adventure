@@ -38,7 +38,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Bootstrap
-        run: ./scripts/bootstrap.sh
+        run: ./bootstrap.sh
         shell: bash
       - name: Build
         run: ./scripts/build.sh
