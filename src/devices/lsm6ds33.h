@@ -1,6 +1,7 @@
 #ifndef LSM6DS33_H
 #define LSM6DS33_H
 
+#include "hardware/i2c.h"
 #include "i2c_device.h"
 
 namespace lsm6ds33 {

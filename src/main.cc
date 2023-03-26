@@ -1,6 +1,6 @@
+#include "devices/lis3mdl.h"
+#include "devices/lsm6ds33.h"
 #include "hardware/i2c.h"
-#include "lis3mdl.h"
-#include "lsm6ds33.h"
 #include "pico/stdlib.h"
 #include <stdio.h>
 #include <stdlib.h>
